@@ -1,0 +1,35 @@
+version: "3"
+services:
+    postgres:
+        image: postgres:13.3-alpine
+        shm_size: 2g
+        environment:
+          POSTGRES_DB: db_name
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: password
+          POSTGRES_HOSTNAME: postgres
+          POSTGRES_PORT: 5432
+        volumes:
+          - ./data-pgsql:/var/lib/postgresql/data
+    api-bar:
+        build:
+            context: ./api-bar
+            dockerfile: Dockerfile
+        volumes:
+            - ./api-bar:/app/
+    proxy:
+        image: nginx:1.23
+        ports:
+          - 80:80
+        depends_on:
+          - api-bar
+          - frontend
+        volumes:
+          - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    frontend:
+        image: node:16-slim
+        volumes:
+          - ./frontend:/app/
+        depends_on:
+          - api-bar
+        command: bash -c "cd /front && npm i && npm start:docker"

@@ -1,0 +1,33 @@
+.container-landing {
+    margin: 2em;
+    padding: 2em;
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.img {
+    width: 20rem;
+    clip-path:ellipse(33% 50%);
+}
+
+.div-infos {
+    display: flex;
+    align-items: center;
+}
+
+.r {
+    flex-direction: row-reverse;
+}
+
+@media only screen and (max-width: 600px) {
+    .container-landing {
+        margin: 0.5em;
+        padding: 0.5em;
+    }
+    .img {
+        width: 10rem;
+        clip-path:ellipse(33% 50%);
+    }
+}
