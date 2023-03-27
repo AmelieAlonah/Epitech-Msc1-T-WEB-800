@@ -1,12 +1,12 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
-import * as request from 'supertest';
-import { BarsModule } from './bars.module';
-import { BarsService } from './bars.service';
+import { Test, TestingModule } from "@nestjs/testing";
+import { INestApplication } from "@nestjs/common";
+import * as request from "supertest";
+import { BarsModule } from "./bars.module";
+import { BarsService } from "./bars.service";
 
-describe('BarsControllerController (e2e)', () => {
+describe("BarsControllerController (e2e)", () => {
   let app: INestApplication;
-  let barsService = { findAll: () => ['test'] };
+  const barsService = { findAll: () => ["test"] };
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -30,9 +30,7 @@ describe('BarsControllerController (e2e)', () => {
   });
 
   it(`/GET bars`, () => {
-    return request(app.getHttpServer())
-      .get('/api/bars')
-      .expect(200)
+    return request(app.getHttpServer()).get("/api/bars").expect(200);
   });
 
   afterAll(async () => {
