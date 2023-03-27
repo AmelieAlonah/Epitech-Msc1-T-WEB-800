@@ -1,5 +1,24 @@
 version: "3"
 services:
+    frontend:
+        image: node:16-slim
+        volumes:
+            - ./frontend:/app/
+        depends_on:
+            - api-bar
+        command: bash -c "cd /frontend && npm i && npm start:docker"
+    api-bar:
+        build:
+            context: ./api-bars
+            dockerfile: Dockerfile
+        volumes:
+            - ./api-bars:/app/
+    api-users:
+        build:
+            context: ./api-users
+            dockerfile: Dockerfile
+        volumes:
+            - ./api-users:/app/
     postgres:
         image: postgres:13.3-alpine
         shm_size: 2g
@@ -11,12 +30,6 @@ services:
           POSTGRES_PORT: 5432
         volumes:
           - ./data-pgsql:/var/lib/postgresql/data
-    api-bar:
-        build:
-            context: ./api-bar
-            dockerfile: Dockerfile
-        volumes:
-            - ./api-bar:/app/
     proxy:
         image: nginx:1.23
         ports:
@@ -26,10 +39,3 @@ services:
           - frontend
         volumes:
           - ./nginx.conf:/etc/nginx/nginx.conf:ro
-    frontend:
-        image: node:16-slim
-        volumes:
-          - ./frontend:/app/
-        depends_on:
-          - api-bar
-        command: bash -c "cd /front && npm i && npm start:docker"
