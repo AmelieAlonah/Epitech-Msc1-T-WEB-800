@@ -6,16 +6,15 @@ on:
 jobs:
     ci-frontend:
         runs-on: ubuntu-latest
+        continue-on-error: false
         defaults:
             run:
-                working-directory: ./api-bar
+                working-directory: ./api-bars
         steps:
             - uses: actions/checkout@v3
             - uses: actions/setup-node@v3
               with:
-                  node-version: 18
-                  cache: 'npm'
-                  cache-dependency-path: api-bar/package-lock.json
+                  node-version: '18'
             - name: Install modules
               run: npm ci
             - name: Eslint check

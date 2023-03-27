@@ -9,15 +9,17 @@ jobs:
         continue-on-error: false
         defaults:
             run:
-                working-directory: ./frontend
+                working-directory: ./api-users
         steps:
             - uses: actions/checkout@v3
             - uses: actions/setup-node@v3
               with:
                   node-version: '18'
             - name: Install modules
-              run: |
-                cd ./frontend
-                npm ci
+              run: npm ci
             - name: Eslint check
               run: npx eslint .eslintrc.js
+            - name: Testing
+              run: |
+                  npm run test
+                  npm run test:e2e
