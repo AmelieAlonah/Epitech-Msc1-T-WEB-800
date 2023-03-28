@@ -11,7 +11,7 @@ function Footer() {
                     <Nav.Link eventKey="link-1">Link</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey="link-2">Link</Nav.Link>
+                    <Nav.Link eventKey="link-2">Cliquez ici</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                     <Nav.Link eventKey="disabled" disabled>

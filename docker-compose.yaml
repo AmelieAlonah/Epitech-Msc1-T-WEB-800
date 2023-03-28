@@ -5,9 +5,10 @@ services:
         volumes:
             - ./frontend:/app/
         depends_on:
-            - api-bar
+            - api-bars
+            - api-users
         command: bash -c "cd /frontend && npm i && npm start:docker"
-    api-bar:
+    api-bars:
         build:
             context: ./api-bars
             dockerfile: Dockerfile
@@ -23,7 +24,7 @@ services:
         image: postgres:13.3-alpine
         shm_size: 2g
         environment:
-          POSTGRES_DB: db_name
+          POSTGRES_DB: db_roadtrip
           POSTGRES_USER: user
           POSTGRES_PASSWORD: password
           POSTGRES_HOSTNAME: postgres
@@ -35,7 +36,8 @@ services:
         ports:
           - 80:80
         depends_on:
-          - api-bar
+          - api-bars
+          - api-users
           - frontend
         volumes:
           - ./nginx.conf:/etc/nginx/nginx.conf:ro

@@ -1,10 +1,10 @@
-name: Tests
+name: Pipeline-CI Backend API Bars
 on:
     push:
         branches:
-            -'**'
+            - '**'
 jobs:
-    ci-frontend:
+    api-bars:
         runs-on: ubuntu-latest
         continue-on-error: false
         defaults:
